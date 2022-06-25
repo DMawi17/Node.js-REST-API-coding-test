@@ -1,11 +1,10 @@
 const express = require("express");
+const routes = require("./route");
 const { port } = require("./config");
 
 const app = express();
 
-app.get("/", (req, res) => {
-    res.send("It works");
-});
+app.use("/", routes);
 
 app.listen(port, (err) => {
     if (err) {

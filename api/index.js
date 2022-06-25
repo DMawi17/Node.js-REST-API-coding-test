@@ -24,8 +24,4 @@ const fetchArtistByName = (str, params = request) => {
     return client.get(ARTIST_SEARCH, params);
 };
 
-fetchArtistByName("summer walker").then((a) =>
-    console.log(a.data.results.artistmatches.artist)
-);
-
 module.exports = fetchArtistByName;
