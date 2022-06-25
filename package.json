@@ -1,0 +1,10 @@
+{
+  "name": "Node.js-REST-API-coding-test",
+  "version": "1.0.0",
+  "description": "A Node.js REST API application that handles search for an artist by name and write the result to the CSV filename.",
+  "main": "server.js",
+  "repository": "git@github.com:DMawi17/Node.js-REST-API-coding-test.git",
+  "author": "DMawi17 <75326045+DMawi17@users.noreply.github.com>",
+  "license": "MIT",
+  "private": true
+}
