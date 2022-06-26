@@ -1,24 +1,24 @@
 const db = require("../db");
-const { recreateArray } = require("../helper");
+const { recreateArray, writeRecordsToCsv, randomize } = require("../helper");
 const fetchArtistByName = require("../api");
 
-let arrayOfArtistObject = [];
+let storeLocalArtist = [];
 
 const list = async (req, res) => {
     try {
-        const name = req.params.artist;
-        const result = await fetchArtistByName(name);
+        const result = await fetchArtistByName(req.params.artist);
         const { artist } = result.data.results.artistmatches;
+        const listRemoteArtist = recreateArray(artist);
 
-        if (artist == 0) {
-            let randomArtist = db[Math.floor(Math.random() * db.length)];
-            [randomArtist] = recreateArray([randomArtist]);
-            arrayOfArtistObject[arrayOfArtistObject.length] = randomArtist;
-        } else {
-            arrayOfArtistObject = recreateArray(artist);
-        }
+        const randomizeLocalArtist = randomize(db, artist, storeLocalArtist);
 
-        res.json(arrayOfArtistObject);
+        const readyResult =
+            artist.length === 0 ? randomizeLocalArtist : listRemoteArtist;
+
+        const beautifyJson = JSON.stringify(readyResult, null, 2) + "\n";
+        res.type("json").send(beautifyJson);
+
+        writeRecordsToCsv(readyResult);
     } catch (error) {
         return res.status(400);
     }

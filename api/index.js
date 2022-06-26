@@ -11,17 +11,16 @@ const client = axios.create({
     },
 });
 
-const params = new URLSearchParams();
-const request = {
+let params = new URLSearchParams();
+params.append("api_key", apiKey);
+params.append("format", "json");
+
+let request = {
     params,
 };
 
 const fetchArtistByName = (str, params = request) => {
-    request.params.append("artist", str);
-    request.params.append("api_key", apiKey);
-    request.params.append("format", "json");
-
-    return client.get(ARTIST_SEARCH, params);
+    return client.get(`${ARTIST_SEARCH}&artist=${str}`, params);
 };
 
 module.exports = fetchArtistByName;
