@@ -6,7 +6,9 @@
     "repository": "git@github.com:DMawi17/Node.js-REST-API-coding-test.git",
     "author": "DMawi17 <75326045+DMawi17@users.noreply.github.com>",
     "license": "MIT",
-    "private": true,
+    "scripts": {
+        "dev": "node server.js"
+    },
     "dependencies": {
         "axios": "^0.27.2",
         "csv-writer": "^1.6.0",
